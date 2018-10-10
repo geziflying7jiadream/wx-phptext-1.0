@@ -1,0 +1,25 @@
+市场行情中，多部分市场行情分割配置文字；
+public initMarket() {
+		//市场行情
+		this.title.text = "市场行情";
+		if (Object.keys(this.data).length) {
+			var arr:any[] = [];
+			for (var k in this.data) {
+				if(this.data[k]){
+					var tips:string[] = (this.data[k] as String).split(":");
+					var _tips1:string = tips[0];
+					var _tips2:string = tips[1];
+					var _color:number = 0x45403C;
+					if(_tips1 == "推荐买") var _color1 = 0x17C41F;
+					else if(_tips1 == "推荐卖") var _color1 = 0xE67046;
+					arr.push({"text":`${_tips1}:`,"style":{"textColor":_color1}});
+					arr.push({"text":`${_tips2}`,"style":{" textColor":_color}});
+					arr.push({"text":"\n\n"});
+				}
+			}
+			this.message.textFlow = <Array<egret.ITextElement>>arr;
+
+		} else {
+			this.message.text = "市场行情稳定";
+		}
+	}
